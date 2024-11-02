@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.BellAfterSearch;
+import pages.BellBeforeSearch;
 
 import java.util.List;
 
@@ -36,5 +38,15 @@ public class Tests extends  BaseTests {
         System.out.println(resultSearch);
         resultSearch.forEach(list -> System.out.println(list.getText()));
         Assertions.assertTrue(resultSearch.stream().anyMatch(list-> list.getText().contains("руководитель")));
+    }
+
+    @Test
+    public void testPO(){
+        chomeDriver.get("https://bellintegrator.ru/search/node");
+        BellBeforeSearch bellBeforeSearch = new BellBeforeSearch(chomeDriver);
+        bellBeforeSearch.find("Филенков");
+        BellAfterSearch bellAfterSearch = new BellAfterSearch(chomeDriver);
+        Assertions.assertTrue(bellAfterSearch.getResult().stream().anyMatch(x->x.getText().contains("руководитель")),
+                "Статьи содержимое" + "руководитель" + "не найдены для поискового слова " + "Филенков");
     }
 }
