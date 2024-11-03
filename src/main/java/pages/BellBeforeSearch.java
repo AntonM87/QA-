@@ -13,8 +13,8 @@ public class BellBeforeSearch {
 
     public BellBeforeSearch(WebDriver chromeDriver) {
         this.chromeDriver = chromeDriver;
-        this.chromeDriver.findElement(By.xpath("//input [@id='edit-keys' and @type='search']"));
-        this.chromeDriver.findElement(By.xpath("//input [@id='edit-submit' and @type='submit']"));
+        this.searchField = this.chromeDriver.findElement(By.xpath("//input [@id='edit-keys' and @type='search']"));
+        this.searchButton = this.chromeDriver.findElement(By.xpath("//input [@id='edit-submit' and @type='submit']"));
     }
 
     public void find(String word) {

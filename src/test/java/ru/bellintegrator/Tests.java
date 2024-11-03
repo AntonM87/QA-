@@ -52,16 +52,16 @@ public class Tests extends  BaseTests {
         bellBeforeSearch.find(word);
         BellAfterSearch bellAfterSearch = new BellAfterSearch(chomeDriver);
         Assertions.assertTrue(bellAfterSearch.getResult().stream().anyMatch(x->x.getText().contains(result)),
-                "Статьи содержимое" + result + "не найдены для поискового слова " + word);
+                "Статьи содержимое: \"" + result + " \" не найдены для поискового слова " + word);
     }
 
     @ParameterizedTest
-    @CsvSource({"Филенков,руководитель"})
+    @CsvSource({"Минаев,руководитель","Филенков,руководитель","Результаты проектов,плохо"})
     public void testPageFactory(String word, String result){
         chomeDriver.get("https://bellintegrator.ru/search/node");
         BellPageFactory bellPageFactory = PageFactory.initElements(chomeDriver,BellPageFactory.class);
         bellPageFactory.find(word);
         Assertions.assertTrue(bellPageFactory.getResult().stream().anyMatch(x->x.getText().contains(result)),
-                "Статьи содержимое" + result + "не найдены для поискового слова " + word);
+                "Статьи содержимое: \"" + result + "\" не найдены для поискового слова " + word);
     }
 }
