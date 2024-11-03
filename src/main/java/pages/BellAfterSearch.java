@@ -8,13 +8,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class BellAfterSearch extends BellBeforeSearch{
-    private List <WebElement> result;
+public class BellAfterSearch extends BellBeforeSearch {
+    private List<WebElement> result;
     private WebDriverWait wait;
 
-    public BellAfterSearch(WebDriver chomeDriver){
+    public BellAfterSearch(WebDriver chomeDriver) {
         super(chomeDriver);
-        wait = new WebDriverWait(chomeDriver,120);
+        wait = new WebDriverWait(chomeDriver, 120);
     }
 
     public List<WebElement> getResult() {

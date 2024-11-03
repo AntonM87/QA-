@@ -17,7 +17,7 @@ public class BellBeforeSearch {
         this.chromeDriver.findElement(By.xpath("//input [@id='edit-submit' and @type='submit']"));
     }
 
-    public void find(String word){
+    public void find(String word) {
         searchField.click();
         searchField.sendKeys(word);
         searchButton.click();

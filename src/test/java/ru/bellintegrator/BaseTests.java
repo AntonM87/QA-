@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class BaseTests{
+public class BaseTests {
 
     protected WebDriver chomeDriver;
 
@@ -19,6 +19,7 @@ public class BaseTests{
         chomeDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         chomeDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
+
     @AfterEach
     public void after() {
         chomeDriver.quit();

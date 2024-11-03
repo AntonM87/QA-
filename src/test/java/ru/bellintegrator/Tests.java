@@ -1,6 +1,8 @@
 package ru.bellintegrator;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,13 +42,20 @@ public class Tests extends  BaseTests {
         Assertions.assertTrue(resultSearch.stream().anyMatch(list-> list.getText().contains("руководитель")));
     }
 
-    @Test
-    public void testPO(){
+    @ParameterizedTest
+    @CsvSource({"Минаев,руководитель","Филенков,руководитель","Результаты проектов,плохо"})
+    public void testPO(String word, String result){
         chomeDriver.get("https://bellintegrator.ru/search/node");
         BellBeforeSearch bellBeforeSearch = new BellBeforeSearch(chomeDriver);
-        bellBeforeSearch.find("Филенков");
+        bellBeforeSearch.find(word);
         BellAfterSearch bellAfterSearch = new BellAfterSearch(chomeDriver);
-        Assertions.assertTrue(bellAfterSearch.getResult().stream().anyMatch(x->x.getText().contains("руководитель")),
-                "Статьи содержимое" + "руководитель" + "не найдены для поискового слова " + "Филенков");
+        Assertions.assertTrue(bellAfterSearch.getResult().stream().anyMatch(x->x.getText().contains(result)),
+                "Статьи содержимое" + result + "не найдены для поискового слова " + word);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"Филенков,руководитель"})
+    public void testPageFactory(String word, String result){
+        chomeDriver.get("https://bellintegrator.ru/search/node");
     }
 }
