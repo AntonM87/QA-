@@ -7,8 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import pages.BellAfterSearch;
 import pages.BellBeforeSearch;
+import pages.BellPageFactory;
 
 import java.util.List;
 
@@ -57,5 +59,9 @@ public class Tests extends  BaseTests {
     @CsvSource({"Филенков,руководитель"})
     public void testPageFactory(String word, String result){
         chomeDriver.get("https://bellintegrator.ru/search/node");
+        BellPageFactory bellPageFactory = PageFactory.initElements(chomeDriver,BellPageFactory.class);
+        bellPageFactory.find(word);
+        Assertions.assertTrue(bellPageFactory.getResult().stream().anyMatch(x->x.getText().contains(result)),
+                "Статьи содержимое" + result + "не найдены для поискового слова " + word);
     }
 }
