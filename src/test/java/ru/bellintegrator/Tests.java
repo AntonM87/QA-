@@ -1,5 +1,6 @@
 package ru.bellintegrator;
 
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,6 +17,8 @@ import java.util.List;
 
 public class Tests extends  BaseTests {
 
+    @Feature("Проверка тайтла")
+    @DisplayName("Проверка тайтла сайта")
     @Test
     public void test() {
         chomeDriver.get("https://bellintegrator.ru/search/node");
@@ -26,7 +29,8 @@ public class Tests extends  BaseTests {
         //input [@id='edit-submit' and @type='submit']
         //ol[contains(@class, 'search-result')]//p[contains(@class,'snippet')]
     }
-
+    @Feature("Проверка результатов поиска")
+    @DisplayName("Проверка результатов поиска напрямую")
     @Test
     public void testFind(){
         chomeDriver.get("https://bellintegrator.ru/search/node");
@@ -44,7 +48,9 @@ public class Tests extends  BaseTests {
         Assertions.assertTrue(resultSearch.stream().anyMatch(list-> list.getText().contains("руководитель")));
     }
 
-    @ParameterizedTest
+    @Feature("Проверка результатов поиска")
+    @DisplayName("Проверка результатов поиска с помощью PageObject")
+    @ParameterizedTest(name="{displayName}:{arguments}")
     @CsvSource({"Минаев,руководитель","Филенков,руководитель","Результаты проектов,плохо"})
     public void testPO(String word, String result){
         chomeDriver.get("https://bellintegrator.ru/search/node");
@@ -55,7 +61,9 @@ public class Tests extends  BaseTests {
                 "Статьи содержимое: \"" + result + " \" не найдены для поискового слова " + word);
     }
 
-    @ParameterizedTest
+    @Feature("Проверка результатов поиска")
+    @DisplayName("Проверка результатов поиска с помощью PageFabric")
+    @ParameterizedTest(name="{displayName}:{arguments}")
     @CsvSource({"Минаев,руководитель","Филенков,руководитель","Результаты проектов,плохо"})
     public void testPageFactory(String word, String result){
         chomeDriver.get("https://bellintegrator.ru/search/node");
