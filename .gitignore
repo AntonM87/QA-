@@ -10,3 +10,10 @@ target/
 *.iws
 *.iml
 *.ipr
+
+# other files
+.allure
+allure-results
+build
+.idea
+target
